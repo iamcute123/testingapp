@@ -6,34 +6,62 @@ import {
   SidebarContent,
   SidebarInset,
   SidebarFooter,
+  useSidebar,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import { Header } from "@/components/layout/header";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
-import { Button } from "@/components/ui/button";
-import { Settings } from "lucide-react";
+import { ChevronsLeft } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+
+function SidebarToggle() {
+  const { toggleSidebar, state, isMobile } = useSidebar();
+
+  if (isMobile) {
+    return null;
+  }
+
+  return (
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <SidebarMenuButton
+          onClick={() => toggleSidebar()}
+          tooltip={{ children: "Toggle Sidebar", side: "right", align: "center" }}
+        >
+          <ChevronsLeft
+            className={cn(
+              "transition-transform duration-300",
+              state === "expanded" ? "" : "rotate-180"
+            )}
+          />
+          <span className="group-data-[collapsible=icon]:hidden">Collapse</span>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  );
+}
 
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider>
-      <Sidebar>
+      <Sidebar collapsible="icon">
         <SidebarHeader className="p-4">
           <Link href="/" className="flex items-center gap-2 group/logo">
              <svg className="w-8 h-8 text-primary transition-transform group-hover/logo:rotate-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 3v18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M7 15l4-4 3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <h1 className="text-xl font-semibold text-sidebar-foreground">QuantVision</h1>
+            <h1 className="text-xl font-semibold text-sidebar-foreground group-data-[collapsible=icon]:hidden">QuantVision</h1>
           </Link>
         </SidebarHeader>
-        <SidebarContent>
+        <SidebarContent className="p-2 pt-0">
           <SidebarNav />
         </SidebarContent>
-        <SidebarFooter>
-          <Button variant="ghost" className="justify-start gap-2 w-full">
-            <Settings className="size-4" />
-            <span>Settings</span>
-          </Button>
+        <SidebarFooter className="p-2 pt-0">
+          <SidebarToggle />
         </SidebarFooter>
       </Sidebar>
       <SidebarInset className="flex flex-col">
