@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BrainCircuit, CandlestickChart, LayoutDashboard, Wallet } from "lucide-react";
+import { BrainCircuit, CandlestickChart, History, LayoutDashboard, Wallet } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -16,6 +16,7 @@ const links = [
   { href: "/strategies", label: "Strategies", icon: CandlestickChart },
   { href: "/portfolio", label: "Portfolio", icon: Wallet },
   { href: "/analysis", label: "AI Analysis", icon: BrainCircuit },
+  { href: "/backtesting", label: "Backtesting", icon: History },
 ];
 
 export function SidebarNav() {
