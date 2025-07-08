@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { AppShell } from "@/components/layout/app-shell"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
-import { addDays, format } from "date-fns"
+import { format } from "date-fns"
 import { Calendar as CalendarIcon, Loader2 } from "lucide-react"
 import type { DateRange } from "react-day-picker"
 
@@ -139,11 +138,9 @@ function BacktestingForm() {
 
 export default function BacktestingPage() {
     return (
-        <AppShell>
-            <div className="flex flex-col gap-6">
-                <h1 className="text-3xl font-bold tracking-tight">Backtesting Engine</h1>
-                <BacktestingForm />
-            </div>
-        </AppShell>
+        <div className="flex flex-col gap-6">
+            <h1 className="text-3xl font-bold tracking-tight">Backtesting Engine</h1>
+            <BacktestingForm />
+        </div>
     )
 }
